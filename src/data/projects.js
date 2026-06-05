@@ -10,7 +10,7 @@ export const projects = [
     desc: '這是一個以 Microsoft 官方網站為藍本的純前端仿切練習。透過細緻觀察原站的排版節奏、留白與字級層級，使用語意化的 HTML 結構搭配 CSS 佈局，逐一重建首頁的視覺區塊。過程中特別著重於響應式斷點的處理，讓畫面在桌機與手機上都能維持一致的閱讀體驗。',
     stack: ['HTML', 'CSS','JavaScript'],
     github: 'https://github.com',
-    demo: '/project/20260421/microsoft-2.html',
+    demo: `${base}project/20260421/microsoft-2.html`,
   },
   {
     id: 'findcolor',
@@ -21,7 +21,7 @@ export const projects = [
     desc: '利用原生 JavaScript、CSS Grid 與最新的 OKLCH 色彩空間技術。捨棄傳統 RGB，透過演算法鎖定感知亮度與彩度，並隨分數以指數衰減函數精準微縮難度，最低挑戰肉眼極限的 0.005 亮度差；同時運用 CSS Grid 實作動態矩陣，讓遊戲畫面隨得分從 2x2 自動擴展至 8x8，並搭配 -3秒 時間懲罰與 @keyframes 晃動動畫等微互動回饋，是一款兼具嚴謹演算法邏輯與流暢 UI/UX 互動的前端作品。',
     stack: [ 'HTML','JavaScript', 'CSS'],
     github: 'https://github.com',
-    demo: '/project/findcolor.html',
+    demo: `${base}project/findcolor.html`,
   },
   {
     id: 'weather',
@@ -32,7 +32,7 @@ export const projects = [
     desc: '透過 fetch 串接公開天氣 API，依使用者輸入的城市名稱查詢即時天氣。介面以卡片呈現溫度、濕度、風速等資訊，並依天氣狀態切換對應的圖示與背景色調。著重在非同步資料處理與載入、錯誤狀態的使用者體驗設計。',
     stack: ['HTML', 'CSS', 'JavaScript', 'API'],
     github: 'https://github.com',
-    demo: '/project/上課天氣預報.html',
+    demo: `${base}project/上課天氣預報.html`,
   },
   {
     id: 'city-tour',
