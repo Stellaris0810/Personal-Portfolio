@@ -1,7 +1,9 @@
+const base = import.meta.env.BASE_URL
+
 export const projects = [
   {
     id: 'ms-clone',
-    image: '/images/ms-clone.png',
+    image: `${base}images/ms-clone.png`,
     title: 'Microsoft 仿切',
     tags: ['CSS', 'HTML','JavaScript'],
     summary: '根據官方網站，透過 CSS 樣式跟 HTML 佈局，仿切出逼真的網站來。',
@@ -12,7 +14,7 @@ export const projects = [
   },
   {
     id: 'findcolor',
-    image: '/images/findcolor.png',
+    image: `${base}images/findcolor.png`,
     title: '色弱遊戲',
     tags: ['HTML','JavaScript', 'CSS'],
     summary: '以 JS 打造的色弱小遊戲，含計分、倒數計時功能。',
@@ -23,7 +25,7 @@ export const projects = [
   },
   {
     id: 'weather',
-    image: '/images/weather.png',
+    image: `${base}images/weather.png`,
     title: '天氣查詢介面',
     tags: ['JavaScript', 'API'],
     summary: '串接天氣 API，依城市即時顯示溫度、濕度與天氣狀態的小工具。',
@@ -34,7 +36,7 @@ export const projects = [
   },
   {
     id: 'city-tour',
-    image: '/images/city-tour.png',
+    image: `${base}images/city-tour.png`,
     title: '城市旅遊網站',
     tags: ['HTML','Vue.js', 'CSS'],
     summary: '以 Vue 3 打造的北海道城市旅遊介紹網站，提供多景點瀏覽。',
