@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0}
+  body{font-family:var(--font-body);padding:0;background:var(--color-bg)}
+  .meta{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);font-weight:600;padding:18px 30px 12px}
+  nav{background:var(--color-nav-bg);box-shadow:0 1px 0 0 #B3A9A5}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 30px}
+  .logo{font-family:var(--font-brand);font-style:italic;color:var(--color-primary);font-size:20px;letter-spacing:.02em}
+  .links{display:flex;align-items:center;gap:30px}
+  .links a{font-size:14px;color:var(--color-neutral);text-decoration:none;padding-bottom:2px}
+  .links a.active{border-bottom:1px solid var(--color-neutral);font-weight:500}
+  .links a.dim{color:var(--fg-3)}
+  .person{color:var(--color-neutral);display:flex}
+</style>
+</head>
+<body>
+  <div class="meta">Navigation Bar</div>
+  <nav>
+    <div class="bar">
+      <span class="logo">Stellaris's Web</span>
+      <div class="links">
+        <a class="active" href="#">首頁</a>
+        <a class="dim" href="#">專業技能</a>
+        <a class="dim" href="#">作品集</a>
+        <span class="person"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>
+      </div>
+    </div>
+  </nav>
+</body>
+</html>

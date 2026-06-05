@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0}
+  body{background:var(--color-bg);font-family:var(--font-body);padding:26px 30px}
+  .meta{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);font-weight:600;margin-bottom:18px}
+  .field{display:flex;align-items:center;gap:12px;width:380px;max-width:100%;padding:13px 16px;background:#fff;border:1px solid var(--border-1);border-radius:6px}
+  .field svg{width:18px;height:18px;color:var(--brown-400)}
+  .field input{border:none;outline:none;font-family:var(--font-body);font-size:15px;color:var(--fg-1);background:transparent;width:100%}
+  .field input::placeholder{color:var(--brown-300)}
+  .cap{font-size:10px;color:var(--fg-3);margin-top:10px}
+</style>
+</head>
+<body>
+  <div class="meta">Search / Text Input</div>
+  <div class="field">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    <input type="text" placeholder="Search" value="">
+  </div>
+  <div class="cap">6px radius · hairline border · brown placeholder &amp; icon</div>
+</body>
+</html>

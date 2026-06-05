@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0}
+  body{background:var(--color-bg);font-family:var(--font-body);padding:24px 30px}
+  .meta{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);font-weight:600;margin-bottom:18px}
+  .row{display:flex;gap:26px;align-items:flex-end}
+  .item{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .box{width:74px;height:60px;background:#fff;border:1px solid var(--border-2)}
+  .nm{font-size:12px;font-weight:700;color:var(--color-neutral)}
+  .px{font-size:10px;color:var(--fg-3)}
+</style>
+</head>
+<body>
+  <div class="meta">Corner Radii — leans square</div>
+  <div class="row">
+    <div class="item"><div class="box" style="border-radius:2px"></div><div class="nm">xs · 2px</div><div class="px">buttons, images</div></div>
+    <div class="item"><div class="box" style="border-radius:6px"></div><div class="nm">sm · 6px</div><div class="px">inputs</div></div>
+    <div class="item"><div class="box" style="border-radius:10px"></div><div class="nm">md · 10px</div><div class="px">cards</div></div>
+    <div class="item"><div class="box" style="border-radius:16px"></div><div class="nm">lg · 16px</div><div class="px">float card</div></div>
+    <div class="item"><div class="box" style="border-radius:999px;width:60px"></div><div class="nm">pill</div><div class="px">chips, ♥</div></div>
+  </div>
+</body>
+</html>

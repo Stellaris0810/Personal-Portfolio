@@ -1,0 +1,30 @@
+/* src/assets/Css/main.css */
+@import "tailwindcss";
+
+@theme {
+  --color-primary:    #5D4037;
+  --color-secondary:  #D7CCC8;
+  --color-bg:         #FCF9F8;
+  --color-nav-bg:     #ECE0DC;
+  --color-nav-border: #B3A9A5;
+  --color-neutral:    #2C2C2C;
+
+  --font-hanken:   'Hanken Grotesk', sans-serif;
+  --font-playfair: 'Playfair Display', serif;
+  --font-manrope:  'Manrope', sans-serif;
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: var(--font-manrope);
+    background-color: var(--color-bg);
+    color: var(--color-neutral);
+    line-height: 1.6;
+  }
+}

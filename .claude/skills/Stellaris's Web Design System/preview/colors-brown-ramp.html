@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0}
+  body{background:var(--color-bg);font-family:var(--font-body);padding:24px 30px}
+  .meta{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);font-weight:600;margin-bottom:16px}
+  .ramp{display:flex;border-radius:8px;overflow:hidden;border:1px solid var(--border-1)}
+  .stop{flex:1;height:60px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;font-size:10px;font-weight:600}
+  .labels{display:flex;margin-top:6px}
+  .labels span{flex:1;text-align:center;font-size:10px;color:var(--fg-3);letter-spacing:.02em}
+</style>
+</head>
+<body>
+  <div class="meta">Primary — Wood-Brown Ramp</div>
+  <div class="ramp">
+    <div class="stop" style="background:#3E2A23;color:#fff">900</div>
+    <div class="stop" style="background:#4D352C;color:#fff">800</div>
+    <div class="stop" style="background:#5D4037;color:#fff">700</div>
+    <div class="stop" style="background:#6F4E43;color:#fff">600</div>
+    <div class="stop" style="background:#836055;color:#fff">500</div>
+    <div class="stop" style="background:#A07E72;color:#fff">400</div>
+    <div class="stop" style="background:#C0A79D;color:#3E2A23">300</div>
+    <div class="stop" style="background:#D7CCC8;color:#3E2A23">200</div>
+    <div class="stop" style="background:#EADFDB;color:#5D4037">100</div>
+    <div class="stop" style="background:#F6F0EE;color:#5D4037">50</div>
+  </div>
+  <div class="labels"><span>700 = Primary · 200 = Secondary</span></div>
+</body>
+</html>

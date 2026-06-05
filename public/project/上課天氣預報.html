@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>台灣天氣預報</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f0f4f8;
+      --surface: #ffffff;
+      --primary: #3b82f6;
+      --primary-light: #eff6ff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --shadow: 0 2px 12px rgba(0,0,0,.07);
+      --radius: 14px;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px 16px 48px;
+    }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -.5px;
+      color: var(--text);
+    }
+    header p {
+      margin-top: 4px;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    /* ── Controls ── */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .search-wrap {
+      display: flex;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: border-color .2s;
+    }
+    .search-wrap:focus-within { border-color: var(--primary); }
+
+    #search {
+      border: none;
+      outline: none;
+      padding: 10px 14px;
+      font-size: .9rem;
+      width: 200px;
+      background: transparent;
+      color: var(--text);
+    }
+
+    #btn {
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      padding: 10px 18px;
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    #btn:hover { background: #2563eb; }
+
+    #region {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      padding: 10px 14px;
+      font-size: .9rem;
+      color: var(--text);
+      outline: none;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: border-color .2s;
+    }
+    #region:focus { border-color: var(--primary); }
+
+    /* ── Status ── */
+    #status {
+      text-align: center;
+      color: var(--muted);
+      font-size: .88rem;
+      margin-bottom: 20px;
+      min-height: 1.2em;
+    }
+
+    /* ── Cards ── */
+    #cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 16px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+      animation: fadeUp .3s ease both;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.10);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .card-icon { font-size: 2rem; line-height: 1; }
+    .card-city  { font-size: 1.1rem; font-weight: 700; }
+
+    .card-desc {
+      font-size: .85rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .85rem;
+    }
+    .info-label { color: var(--muted); }
+    .info-value { font-weight: 600; }
+
+    .temp-range {
+      background: var(--primary-light);
+      border-radius: 8px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 4px;
+    }
+
+    .rain-bar-wrap {
+      background: #e2e8f0;
+      border-radius: 99px;
+      height: 6px;
+      flex: 1;
+      margin: 0 8px;
+      overflow: hidden;
+    }
+    .rain-bar {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 99px;
+      transition: width .5s ease;
+    }
+
+    /* ── No result ── */
+    .empty {
+      grid-column: 1/-1;
+      text-align: center;
+      color: var(--muted);
+      padding: 48px 0;
+      font-size: 1rem;
+    }
+
+    /* ── Loading skeleton ── */
+    .skeleton {
+      background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.2s infinite;
+      border-radius: 8px;
+      height: 14px;
+      margin-bottom: 8px;
+    }
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🌤 台灣天氣預報</h1>
+    <p>資料來源：中央氣象署 Open Data</p>
+  </header>
+
+  <div class="controls">
+    <div class="search-wrap">
+      <input type="text" id="search" placeholder="搜尋縣市…" />
+      <button type="button" id="btn">搜尋</button>
+    </div>
+    <select id="region">
+      <option value="">全部地區</option>
+      <option value="north">北部</option>
+      <option value="central">中部</option>
+      <option value="south">南部</option>
+      <option value="east">東部</option>
+      <option value="island">離島</option>
+    </select>
+  </div>
+
+  <div id="status">資料載入中…</div>
+  <section id="cards"></section>
+
+  <script>
+    // ── 地區分類 ──
+    const REGIONS = {
+      north:   ['臺北市','新北市','基隆市','桃園市','新竹市','新竹縣','宜蘭縣'],
+      central: ['苗栗縣','臺中市','彰化縣','南投縣','雲林縣'],
+      south:   ['嘉義市','嘉義縣','臺南市','高雄市','屏東縣'],
+      east:    ['花蓮縣','臺東縣'],
+      island:  ['澎湖縣','金門縣','連江縣'],
+    };
+
+    // ── 天氣 emoji 對應 ──
+    function weatherIcon(wx) {
+      if (!wx) return '🌈';
+      if (wx.includes('晴')) return wx.includes('雲') ? '⛅' : '☀️';
+      if (wx.includes('多雲')) return '🌥';
+      if (wx.includes('陰')) return '☁️';
+      if (wx.includes('雷')) return '⛈';
+      if (wx.includes('雨')) return '🌧';
+      if (wx.includes('霧')) return '🌫';
+      return '🌈';
+    }
+
+    let allCitys = [];
+    let currentSearch = '';
+    let currentRegion = '';
+
+    // ── 撈資料 ──
+    fetch('https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWA-BA032A01-F739-4B42-82DB-725DB477B740&format=JSON&locationName=&elementName=')
+      .then(r => r.json())
+      .then(data => {
+        allCitys = data.records.location;
+        document.getElementById('status').textContent = '';
+        showList();
+      })
+      .catch(err => {
+        document.getElementById('status').textContent = '⚠️ 資料載入失敗，請確認網路或 API Key';
+      });
+
+    // ── 搜尋按鈕 ──
+    document.getElementById('btn').addEventListener('click', applyFilter);
+    document.getElementById('search').addEventListener('keydown', e => { if (e.key === 'Enter') applyFilter(); });
+    document.getElementById('region').addEventListener('change', applyFilter);
+
+    function applyFilter() {
+      currentSearch = document.getElementById('search').value.trim();
+      currentRegion = document.getElementById('region').value;
+      showList();
+    }
+
+    // ── 顯示卡片 ──
+    function showList() {
+      const regionSet = currentRegion ? new Set(REGIONS[currentRegion]) : null;
+
+      let filtered = allCitys.filter(c => {
+        const matchSearch = !currentSearch || c.locationName.includes(currentSearch);
+        const matchRegion = !regionSet || regionSet.has(c.locationName);
+        return matchSearch && matchRegion;
+      });
+
+      const cards = document.getElementById('cards');
+      cards.innerHTML = '';
+
+      if (!filtered.length) {
+        cards.innerHTML = '<div class="empty">😶 找不到符合的縣市</div>';
+        return;
+      }
+
+      filtered.forEach((city, i) => {
+        const wx    = returnText(city.weatherElement, 0);
+        const pop   = returnText(city.weatherElement, 1);
+        const minT  = returnText(city.weatherElement, 2);
+        const ci    = returnText(city.weatherElement, 3);
+        const maxT  = returnText(city.weatherElement, 4);
+        const unit  = returnText(city.weatherElement, 2, 'parameterUnit') || '°C';
+
+        cards.innerHTML += `
+          <div class="card" style="animation-delay:${i * 0.03}s">
+            <div class="card-header">
+              <span class="card-icon">${weatherIcon(wx)}</span>
+              <span class="card-city">${city.locationName}</span>
+            </div>
+            <div class="card-desc">${wx || '—'}</div>
+            <div class="card-body">
+              <div class="info-row">
+                <span class="info-label">舒適度</span>
+                <span class="info-value">${ci || '—'}</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">降雨機率</span>
+                <div class="rain-bar-wrap">
+                  <div class="rain-bar" style="width:${pop || 0}%"></div>
+                </div>
+                <span class="info-value">${pop ?? '—'}%</span>
+              </div>
+              <div class="temp-range">
+                🌡 ${minT}${unit} ～ ${maxT}${unit}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function returnText(elements, key, select = 'parameterName') {
+      return elements[key]?.time[0]?.parameter[select] ?? null;
+    }
+  </script>
+</body>
+</html>

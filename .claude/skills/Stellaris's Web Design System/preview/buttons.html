@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0}
+  body{background:var(--color-bg);font-family:var(--font-body);padding:26px 30px}
+  .meta{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);font-weight:600;margin-bottom:20px}
+  .row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:13px 24px;border-radius:2px;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;border:1px solid transparent;font-family:var(--font-body)}
+  .primary{background:var(--color-primary);color:#fff;border-color:var(--color-primary)}
+  .secondary{background:var(--color-secondary);color:var(--color-primary)}
+  .inverted{background:var(--color-neutral);color:#fff}
+  .outlined{background:transparent;color:var(--color-primary);border-color:var(--color-primary)}
+  svg{width:14px;height:14px}
+</style>
+</head>
+<body>
+  <div class="meta">Buttons — 4 variants</div>
+  <div class="row">
+    <button class="btn primary">了解更多 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    <button class="btn secondary">Secondary</button>
+    <button class="btn inverted">Inverted</button>
+    <button class="btn outlined">Outlined</button>
+  </div>
+</body>
+</html>

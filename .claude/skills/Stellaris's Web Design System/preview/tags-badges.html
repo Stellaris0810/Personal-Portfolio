@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0}
+  body{background:var(--color-bg);font-family:var(--font-body);padding:26px 30px}
+  .meta{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);font-weight:600;margin-bottom:18px}
+  .grp{display:flex;gap:38px;align-items:center}
+  .col{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+  .cap{font-size:10px;color:var(--fg-3);letter-spacing:.04em}
+  .chip{display:inline-block;padding:5px 14px;border-radius:999px;background:var(--color-secondary);color:var(--color-primary);font-size:13px;font-weight:600}
+  .tags{display:flex;gap:8px}
+  .fav{width:40px;height:40px;border-radius:999px;background:#fff;border:1px solid var(--border-1);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center}
+  .stars{color:var(--color-primary);font-size:16px;letter-spacing:3px}
+</style>
+</head>
+<body>
+  <div class="meta">Tags · Favorite · Rating</div>
+  <div class="grp">
+    <div class="col"><div class="tags"><span class="chip">CSS</span><span class="chip">HTML</span><span class="chip">Vue.js</span></div><span class="cap">Tech tag chips</span></div>
+    <div class="col"><div class="fav"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5D4037" stroke-width="1.6"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div><span class="cap">♥ favorite</span></div>
+    <div class="col"><div class="stars">★★★★★</div><span class="cap">5-point rating</span></div>
+  </div>
+</body>
+</html>

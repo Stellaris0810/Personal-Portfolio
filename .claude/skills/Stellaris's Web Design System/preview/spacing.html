@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0}
+  body{background:var(--color-bg);font-family:var(--font-body);padding:24px 30px}
+  .meta{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);font-weight:600;margin-bottom:18px}
+  .scale{display:flex;align-items:flex-end;gap:14px}
+  .item{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .bar{width:30px;background:var(--color-primary);border-radius:2px}
+  .nm{font-size:10px;color:var(--fg-3);font-weight:600}
+</style>
+</head>
+<body>
+  <div class="meta">Spacing Scale (4px base)</div>
+  <div class="scale">
+    <div class="item"><div class="bar" style="height:8px"></div><div class="nm">2 · 8</div></div>
+    <div class="item"><div class="bar" style="height:16px"></div><div class="nm">4 · 16</div></div>
+    <div class="item"><div class="bar" style="height:24px"></div><div class="nm">6 · 24</div></div>
+    <div class="item"><div class="bar" style="height:32px"></div><div class="nm">8 · 32</div></div>
+    <div class="item"><div class="bar" style="height:48px"></div><div class="nm">12 · 48</div></div>
+    <div class="item"><div class="bar" style="height:64px"></div><div class="nm">16 · 64</div></div>
+    <div class="item"><div class="bar" style="height:96px"></div><div class="nm">24 · 96</div></div>
+    <div class="item"><div class="bar" style="height:112px"></div><div class="nm">28 · 112</div></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>色弱挑戰賽 - Peak Showdown</title>
+    <style>
+        :root {
+            --primary-bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --accent-color: #4CAF50;
+        }
+
+        body {
+            font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            background-color: var(--primary-bg);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* 遊戲主面板 */
+        #game-board {
+            width: 90vw;
+            height: 90vw;
+            max-width: 500px;
+            max-height: 500px;
+            background: var(--card-bg);
+            padding: 12px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            display: grid;
+            gap: 8px;
+            /* 方塊間隙 */
+        }
+
+        .box {
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+
+        .box:active {
+            transform: scale(0.96);
+        }
+
+        /* 遊戲結束遮罩 */
+        #end-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            /* 初始隱藏 */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            z-index: 100;
+        }
+
+        button {
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+
+        /* 點錯時的晃動動畫 */
+        .shake {
+            animation: shake 0.3s ease-in-out;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-10px);
+            }
+
+            75% {
+                transform: translateX(10px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>色弱挑戰賽</h1>
+        <div class="stats-bar">
+            <div>得分：<span id="score">0</span></div>
+            <div>剩餘時間：<span id="timer">30</span>s</div>
+        </div>
+    </div>
+
+    <!-- 遊戲主要區域 -->
+    <div id="game-board"></div>
+
+    <!-- 結算畫面 -->
+    <div id="end-screen">
+        <h2>時間到！</h2>
+        <p>最終得分：<span id="final-score">0</span></p>
+        <button id="retry-btn">重新開始</button>
+    </div>
+
+    <script>
+        // 使用 querySelector 選取元素
+        const gameBoard = document.querySelector('#game-board');
+        const scoreText = document.querySelector('#score');
+        const timerText = document.querySelector('#timer');
+        const endScreen = document.querySelector('#end-screen');
+        const finalScoreText = document.querySelector('#final-score');
+        const retryBtn = document.querySelector('#retry-btn');
+
+        let score = 0;
+        let timeLeft = 30;
+        let timerId = null;
+        let gridSize = 2; // 起始從 2x2 開始
+
+        // 初始化/開始遊戲
+        function initGame() {
+            score = 0;
+            timeLeft = 30;
+            gridSize = 2;
+            scoreText.textContent = score;
+            timerText.textContent = timeLeft;
+            endScreen.style.display = 'none';
+
+            startCountdown();
+            createLevel();
+        }
+
+        // 計時器邏輯
+        function startCountdown() {
+            clearInterval(timerId);
+            timerId = setInterval(() => {
+                timeLeft--;
+                timerText.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    gameOver();
+                }
+            }, 1000);
+        }
+
+        // 結束遊戲
+        function gameOver() {
+            clearInterval(timerId);
+            endScreen.style.display = 'flex';
+            finalScoreText.textContent = score;
+        }
+
+        // 建立關卡內容
+        function createLevel() {
+            gameBoard.innerHTML = '';
+
+            // 難度進階邏輯
+            if (score > 2) gridSize = 3;
+            if (score > 8) gridSize = 4;
+            if (score > 15) gridSize = 5;
+            if (score > 25) gridSize = 6;
+            if (score > 40) gridSize = 7;
+            if (score > 60) gridSize = 8;
+
+            // 更新 Grid 佈局
+            gameBoard.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+
+            const totalCells = gridSize * gridSize;
+            const answerIndex = Math.floor(Math.random() * totalCells);
+            const { base, target } = generateColors(score);
+
+            for (let i = 0; i < totalCells; i++) {
+                const box = document.createElement('div');
+                box.classList.add('box');
+
+                if (i === answerIndex) {
+                    box.style.backgroundColor = target;
+                    box.addEventListener('click', nextLevel);
+                } else {
+                    box.style.backgroundColor = base;
+                    box.addEventListener('click', penalty);
+                }
+
+                gameBoard.appendChild(box);
+            }
+        }
+
+        // 顏色演算法
+        function generateColors(currentScore) {
+            const h = Math.floor(Math.random() * 360);
+            const c = 0.15; // 彩度
+            const l = 0.6;  // 感官亮度
+
+            // OKLCH 的亮度差距 0.01 就已經非常難分辨
+            let diff = Math.max(0.005, 0.05 * Math.pow(0.9, Math.floor(currentScore / 3)));
+
+            return {
+                base: `oklch(${l} ${c} ${h})`,
+                target: `oklch(${l + diff} ${c} ${h})`
+            };
+        }   
+
+        // 點對了
+        function nextLevel() {
+            score++;
+            scoreText.textContent = score;
+            createLevel();
+        }
+
+        // 點錯了 (懲罰機制)
+        function penalty() {
+            timeLeft = Math.max(0, timeLeft - 3); // 點錯扣三秒
+            timerText.textContent = timeLeft;
+
+            // 畫面晃動效果
+            gameBoard.classList.add('shake');
+            setTimeout(() => {
+                gameBoard.classList.remove('shake');
+            }, 300);
+        }
+
+        // 事件監聽
+        retryBtn.addEventListener('click', initGame);
+
+        // 啟動
+        initGame();
+    </script>
+</body>
+
+</html>

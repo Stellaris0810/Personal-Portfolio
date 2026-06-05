@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0}
+  body{background:var(--color-bg);font-family:var(--font-body);padding:22px 30px}
+  .meta{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3);font-weight:600;margin-bottom:14px}
+  .card{width:320px;background:#fff;border:1px solid var(--border-1);border-radius:10px;overflow:hidden;box-shadow:var(--shadow-md)}
+  .thumb{height:130px;position:relative;background:
+    repeating-conic-gradient(#eee 0 25%, #f7f7f5 0 50%) 0 0/22px 22px}
+  .fav{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:999px;background:#fff;box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center}
+  .body{padding:14px 16px 16px}
+  .tags{display:flex;gap:6px;margin-bottom:8px}
+  .chip{padding:3px 11px;border-radius:999px;background:var(--color-secondary);color:var(--color-primary);font-size:12px;font-weight:600}
+  h3{font-family:var(--font-display);font-size:19px;font-weight:700;color:var(--color-neutral);margin:0 0 6px}
+  p{font-size:13px;color:var(--fg-3);line-height:1.6;margin:0 0 14px}
+  .btn{width:100%;padding:11px;border:none;border-radius:2px;background:var(--color-primary);color:#fff;font-size:13px;font-weight:600;font-family:var(--font-body);letter-spacing:.06em;cursor:pointer}
+</style>
+</head>
+<body>
+  <div class="meta">Project Card</div>
+  <div class="card">
+    <div class="thumb"><div class="fav"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5D4037" stroke-width="1.6"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div></div>
+    <div class="body">
+      <div class="tags"><span class="chip">CSS</span><span class="chip">HTML</span></div>
+      <h3>Microsoft 仿切</h3>
+      <p>根據官方網站，透過 CSS 樣式跟 HTML 佈局，仿切出逼真的網站來。</p>
+      <button class="btn">查看作品</button>
+    </div>
+  </div>
+</body>
+</html>
