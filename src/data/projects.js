@@ -45,4 +45,15 @@ export const projects = [
     github: 'https://github.com/stellaris0810/city-tour',
     demo: 'https://stellaris0810.github.io/city-tour/#/cities',
   },
+  {
+    id: 'iculture',
+    image: `${base}images/iculture.png`,
+    title: '專題-文化部iculture改版',
+    tags: ['HTML','Vue.js','Tailwind'],
+    summary: '基於 Vue 3 重構文化部藝文活動平台,整合活動、場館、藝人多型別資料的響應式前端專案。',
+    desc: 'iCulture 為文化部藝文活動平台改版,我擔任資深前端角色,主導從競品分析、資訊架構重構(16 分類精簡為 8 大主題)到前端落地的完整流程。專案以 Vue 3 + Vite + Tailwind CSS v4 + Pinia 建構,完成全站聚合搜尋、三態個人化推薦、會員收藏模擬與全頁面 RWD,並導入 fluid typography 與 Leaflet 互動地圖,展現資料驅動的文化體驗設計思維。',
+    stack: ['HTML','Vue.js', 'JavaScript', 'Tailwind','Pinia'],
+    github: 'https://github.com',
+    demo: 'https://nchu-11503-iculture.dev-hub.io/',
+  },
 ]

@@ -4,7 +4,7 @@ export const skills = [
   { name: 'JavaScript',   iconClass: 'devicon-javascript-plain',   level: 4 },
   { name: 'Vue.js',       iconClass: 'devicon-vuejs-plain',        level: 4 },
   { name: 'Git',          iconClass: 'devicon-git-plain',          level: 3 },
-  { name: 'Tailwind CSS', iconClass: 'devicon-tailwindcss-plain',  level: 3 },
+  { name: 'Tailwind CSS', iconClass: 'devicon-tailwindcss-plain',  level: 4 },
   {
     name: 'RWD',
     iconClass: null,
