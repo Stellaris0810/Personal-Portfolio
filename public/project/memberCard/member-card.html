@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 綜合練習作業 - 頂級奢華會員小卡產生器</title>
+    <style>
+        /* 引入高端字體與圖標 */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Noto+Sans+TC:wght@300;500;700&display=swap');
+
+        body {
+            background-color: #0d1b2a;
+            background-image: url(./img/sunset_1.jpg);
+            background-size: cover;
+
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 60px 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* 頂級飯店式字體與金色陰影 */
+        h1 {
+            font-family: 'Cinzel', 'Noto Sans TC', serif;
+            color: #f39c12;
+            /* 1. 定義飯店日出金箔漸層色背景 */
+            background: linear-gradient(135deg, #ffe066 0%, #f39c12 50%, #d4af37 100%);
+            /* 2. 同時定義 Webkit 前綴與標準屬性，確保完美相容性 */
+            -webkit-background-clip: text;
+            /* 針對 Safari、舊版 Chrome/Edge */
+            background-clip: text;
+            /* 現代標準瀏覽器規範 */
+            /* 3. 讓原本的字體文字變透明，讓後面的漸層透出來 */
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            
+            margin-bottom: 8px;
+            font-size: 46px;
+            letter-spacing: 4px;
+            font-weight: 700;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        .subtitle {
+            color: #e0e6ed;
+            margin-bottom: 50px;
+            font-weight: 300;
+            font-size: 22px;
+            letter-spacing: 6px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        /* 左右主區塊排版 */
+        .container {
+            display: flex;
+            gap: 45px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* 五星級飯店沉穩暗色系毛玻璃表單 */
+        .form-section {
+            flex: 1;
+            background: rgba(10, 25, 47, 0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 35px;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+        }
+
+        .form-section h2 {
+            font-size: 24px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-align: center;
+            color: #f39c12;
+            margin-bottom: 25px;
+            margin-top: 0;
+
+
+
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group label {
+            display: inline-block;
+            width: 150px;
+            font-weight: 500;
+            color: #cbd5e1;
+            font-size: 18px;
+        }
+
+        /* 輸入框與選單改為奢華暗調 */
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group select {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.07);
+            padding: 10px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            outline: none;
+            font-size: 16px;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder {
+            color: #64748b;
+        }
+
+        /* 聚焦時散發日出微光 */
+        .form-group input[type="text"]:focus,
+        .form-group input[type="number"]:focus,
+        .form-group select:focus {
+            border-color: #f39c12;
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 12px rgba(243, 156, 18, 0.4);
+        }
+
+        /* 下拉選單內部選項背景修正 */
+        .form-group select option {
+            background-color: #0a192f;
+            color: #ffffff;
+        }
+
+        /* 客製化奢華金勾選框 */
+        .form-group input[type="checkbox"] {
+            transform: scale(1.6);
+            margin-left: 10px;
+            cursor: pointer;
+            accent-color: #f39c12;
+        }
+
+        /* 右側預覽區 */
+        .preview-section {
+            flex: 1;
+            background: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 420px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+        }
+
+        /* 會員小卡基礎樣式：頂級黑金飯店卡片 */
+        .member-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            width: 340px;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #f8fafc;
+        }
+
+        /* 頭像外框（高空圓窗感） */
+        .avatar-box {
+            width: 145px;
+            height: 145px;
+            margin: 0 auto 22px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #1e293b;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .avatar-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-name {
+            font-family: 'Cinzel', 'Noto Sans TC', serif;
+            font-size: 30px;
+            font-weight: 700;
+            margin: 15px 0 5px;
+            color: #ffffff;
+            letter-spacing: 2px;
+        }
+
+        /* 飯店精緻分隔線 */
+        .divider {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            width: 60%;
+            margin: 15px auto;
+        }
+
+        .member-info {
+            color: #94a3b8;
+            font-size: 19px;
+            margin: 8px 0;
+            font-weight: 300;
+        }
+
+        /* 會員等級高光 */
+        .member-level {
+            color: #38bdf8;
+            font-weight: 700;
+            letter-spacing: 3px;
+            font-size: 18px;
+            margin-top: 12px;
+            text-transform: uppercase;
+        }
+
+        /* 飯店迎賓詳細資料區塊 */
+        .detail-block {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #38bdf8;
+            padding: 15px;
+            border-radius: 4px 12px 12px 4px;
+            font-size: 16px;
+            color: #e2e8f0;
+            margin-top: 22px;
+            line-height: 1.6;
+            text-align: left;
+            font-weight: 300;
+        }
+
+        /* 👑 皇家 VIP 模式（山頂落日金效果爆棚） */
+        .vip-card {
+            border: 2px solid #d4af37;
+            background: linear-gradient(135deg, #1e1b10 0%, #0a0905 100%);
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.35), inset 0 0 20px rgba(212, 175, 55, 0.1);
+        }
+
+        .vip-card .avatar-box {
+            border: 3px solid #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+
+        .vip-card .member-name {
+            color: #ffe066;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .vip-card .divider {
+            border-top: 1px solid rgba(212, 175, 55, 0.4);
+        }
+
+        .vip-card .member-level {
+            color: #d4af37;
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+        }
+
+        .vip-card .detail-block {
+            background: rgba(212, 175, 55, 0.06);
+            border-left: 4px solid #d4af37;
+            color: #f5e6c4;
+        }
+
+        /* 無資料時的優雅提示 */
+        .no-data {
+            color: #64748b;
+            font-style: italic;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>THE SUNSET PAVILION</h1>
+    <div class="subtitle">會員資料建立系統</div>
+
+    <div id="app" class="container">
+
+        <div class="form-section">
+            <h2>會員資料建立</h2>
+
+            <div class="form-group">
+                <label for="name">貴賓姓名：</label>
+                <input type="text" id="name" v-model.trim="inputName" placeholder="請輸入姓名">
+            </div>
+
+            <div class="form-group">
+                <label for="age">貴賓年齡：</label>
+                <input type="number" id="age" v-model.number="inputAge" placeholder="請輸入年齡">
+            </div>
+
+            <div class="form-group">
+                <label for="level">席位權限：</label>
+                <select id="level" v-model="inputLevel">
+                    <option value="一般會員">一般會員 (Standard)</option>
+                    <option value="高級會員">高級會員 (Premium)</option>
+                    <option value="白金會員">白金會員 (Platinum)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="avatar">頭像識別網址：</label>
+                <input type="text" id="avatar" v-model="avatarUrl" placeholder="請輸入相片網址">
+            </div>
+
+            <div class="form-group">
+                <label>顯示詳細資訊 ：</label>
+                <input type="checkbox" v-model="showDetail">
+            </div>
+
+            <div class="form-group">
+                <label> VIP 模式：</label>
+                <input type="checkbox" v-model="isVip">
+            </div>
+        </div>
+
+        <div class="preview-section">
+
+            <div v-if="inputName" class="member-card" :class="{ 'vip-card': isVip }">
+
+                <div class="avatar-box">
+                    <img :src="avatarUrl || 'https://picsum.photos/150/150?random=2'" alt="會員頭像">
+                </div>
+
+                <div class="member-name">{{ inputName }}</div>
+                <hr class="divider">
+
+                <div class="member-info">{{ inputAge || '—' }}歲</div>
+                <div class="member-info member-level">✦ {{ inputLevel }} ✦</div>
+
+                <div v-show="showDetail" class="detail-block">
+                    經認證為尊貴的【{{ inputLevel }}】。<br>
+                    閣下尊享山頂天際線專屬行政酒廊權益，歡迎蒞臨。
+                </div>
+            </div>
+
+            <div v-else class="no-data">
+                — 正在等待資料輸入 —
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp, ref } = Vue;
+
+        createApp({
+            setup() {
+                const inputName = ref('');
+                const inputAge = ref(null);
+                const inputLevel = ref('');
+                const avatarUrl = ref('');
+                const showDetail = ref(false);
+                const isVip = ref(false);
+
+                return {
+                    inputName,
+                    inputAge,
+                    inputLevel,
+                    avatarUrl,
+                    showDetail,
+                    isVip
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

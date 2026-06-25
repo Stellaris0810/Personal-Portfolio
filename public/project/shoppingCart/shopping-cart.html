@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的質感購物車</title>
+    <style>
+        /* 基礎全域設定 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            background-color: #f7f1eb;
+            /* 柔和的杏色背景 */
+            color: #4a4a4a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #app {
+            width: 100%;
+            max-width: 800px;
+            background-color: #ffffff;
+            margin: 20px;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            text-align: center;
+            color: #3d3d3d;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        /* 商品卡片外層容器：橫向排列 */
+        .products-container {
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            /* 畫面不夠寬時自動換行 */
+        }
+
+        /* 單一商品卡片 */
+        .product-card {
+            flex: 1;
+            min-width: 200px;
+            /* 保證手機版不會太窄 */
+            background: #fafafa;
+            border: 1px solid #eaeaea;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        /* 滑鼠懸停卡片特效 */
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-card p {
+            margin: 0 0 12px 0;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        /* 圖片美化 */
+        .product-card img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            /* 確保圖片不變形 */
+            border-radius: 8px;
+            background-color: #eee;
+            /* 圖片載入前的預設底色 */
+            margin-bottom: 12px;
+        }
+
+        .price-tag {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        /* 輸入框美化 */
+        .input-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .input-group label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .input-group input {
+            width: 70px;
+            padding: 6px 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus {
+            border-color: #d35400;
+            /* 聚焦時變成亮橘色 */
+        }
+
+        /* 分隔線 */
+        hr {
+            border: none;
+            border-top: 1px solid #eeeeee;
+            margin: 30px 0;
+        }
+
+        /* 總金額結算區 */
+        .total-section {
+            text-align: right;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .total-price {
+            color: #e67e22;
+            /* 醒目的橘紅色 */
+            font-size: 1.8rem;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>🛒 我的購物車</h1>
+
+        <!-- 新增一個容器把商品包起來，方便跑 Flexbox 排版 -->
+        <div class="products-container">
+            <!-- 馬克杯 -->
+            <div class="product-card">
+                <p>馬克杯</p>
+                <img src="./img/cup.jpg" alt="馬克杯">
+                <div class="price-tag">單價 {{cupPrice}} 元</div>
+                <div class="input-group">
+                    <label for="cup">數量:</label>
+                    <input type="number" id="cup" v-model.number="cupCount" min="0">
+                </div>
+            </div>
+
+            <!-- 上好美盤 -->
+            <div class="product-card">
+                <p>上好美盤</p>
+                <img src="./img/上好美盤.jpg" alt="上好美盤">
+                <div class="price-tag">單價 {{platePrice}} 元</div>
+                <div class="input-group">
+                    <label for="plate">數量:</label>
+                    <input type="number" id="plate" v-model.number="plateCount" min="0">
+                </div>
+            </div>
+
+            <!-- 帽子 -->
+            <div class="product-card">
+                <p>帽子</p>
+                <img src="./img/帽子.jpg" alt="帽子">
+                <div class="price-tag">單價 {{hatPrice}} 元</div>
+                <div class="input-group">
+                    <label for="hat">數量:</label>
+                    <input type="number" id="hat" v-model.number="hatCount" min="0">
+                </div>
+            </div>
+
+            <div class="product-card">
+                <p>神奇海螺</p>
+                <img src="./img/海螺.jpg" alt="神奇海螺">
+                <div class="price-tag">單價 {{conchPrice}} 元</div>
+                <div class="input-group">
+                    <label for="conch">數量:</label>
+                    <input type="number" id="conch" v-model.number="conchCount" min="0">
+                </div>
+            </div>
+
+            <div class="product-card">
+                <p>美味蟹堡</p>
+                <img src="./img/burger.webp" alt="美味蟹堡">
+                <div class="price-tag">單價 {{burgerPrice}} 元</div>
+                <div class="input-group">
+                    <label for="burger">數量:</label>
+                    <input type="number" id="burger" v-model.number="burgerCount" min="0">
+                </div>
+            </div>
+
+            <div class="product-card">
+                <p>熱狗</p>
+                <img src="./img/hotdog.jpg" alt="熱狗">
+                <div class="price-tag">單價 {{hotdogPrice}} 元</div>
+                <div class="input-group">
+                    <label for="hotdog">數量:</label>
+                    <input type="number" id="hotdog" v-model.number="hotdogCount" min="0">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="total-section">
+            總金額: <span class="total-price">{{totalPrice}}</span> 元
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp, ref, computed } = Vue;
+        const app = createApp({
+            setup() {
+                const cupPrice = ref(150);
+                const platePrice = ref(1000);
+                const hatPrice = ref(100);
+                const conchPrice = ref(300);
+                const burgerPrice = ref(90);
+                const hotdogPrice = ref(70);
+
+                const cupCount = ref(0);
+                const plateCount = ref(0);
+                const hatCount = ref(0);
+                const conchCount = ref(0);
+                const burgerCount = ref(0);
+                const hotdogCount = ref(0);
+
+
+                const totalPrice = computed(() => {
+                    // 1. 分開計算每個品項的個別總額
+                    const cupTotal = cupPrice.value * cupCount.value;
+                    const plateTotal = platePrice.value * plateCount.value;
+                    const hatTotal = hatPrice.value * hatCount.value;
+                    const conchTotal = conchPrice.value * conchCount.value;
+                    const burgerTotal = burgerPrice.value * burgerCount.value;
+                    const hotdogTotal = hotdogPrice.value * hotdogCount.value;
+
+                    // 2. 將所有個別總額加總
+                    const finalSum = cupTotal + plateTotal + hatTotal + conchTotal + burgerTotal + hotdogTotal;
+
+                    // 3. 最後 return 回去
+                    return finalSum;
+                });
+
+                return {
+                    platePrice,
+                    cupPrice,
+                    hatPrice,
+                    conchPrice,
+                    burgerPrice,
+                    hotdogPrice,
+                    cupCount,
+                    plateCount,
+                    hatCount,
+                    conchCount,
+                    burgerCount,
+                    hotdogCount,
+                    totalPrice,
+                }
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+
+</html>
