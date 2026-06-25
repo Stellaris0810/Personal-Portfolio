@@ -13,10 +13,10 @@ const router = useRouter()
 </script>
 
 <template>
-  <div class="w-full px-10 md:px-16">
+  <div class="w-full px-5 md:px-16">
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center py-6">
-      <div class="flex flex-col items-end text-left justify-center w-full">
+      <div v-reveal class="flex flex-col items-center md:items-end text-center md:text-left justify-center w-full order-2 md:order-1">
         <div>
           <span class="text-xs md:text-sm tracking-[0.4em] uppercase text-primary opacity-70 font-semibold font-manrope mb-4 md:mb-6 block">
           {{ welcomeText }}
@@ -26,7 +26,7 @@ const router = useRouter()
           你好，我是<span class="text-primary font-extrabold block mt-2 lg:mt-3">{{ name }}</span>
         </h1>
 
-        <div class="flex  items-center gap-4 mb-10 md:mb-14">
+        <div class="flex items-center justify-center md:justify-start gap-4 mb-10 md:mb-14">
           <div class="w-8 h-[1.5px] bg-primary opacity-40"></div>
           <p class="font-manrope text-base md:text-lg text-neutral opacity-60 font-medium tracking-[0.15em]">
             {{ title }}
@@ -44,7 +44,7 @@ const router = useRouter()
         
       </div>
 
-      <div class="flex justify-start  w-full">
+      <div v-reveal="120" class="flex justify-center md:justify-start w-full order-1 md:order-2">
         <div class="w-full max-w-[380px] lg:max-w-[440px] overflow-hidden rounded-xs bg-white p-3 border border-nav-border/40 shadow-md aspect-[3/4] select-none">
           <img :src="image" :alt="name" 
           class="w-full h-full object-cover object-top filter saturate-[0.96] contrast-[1.01]" />
@@ -52,12 +52,12 @@ const router = useRouter()
       </div>
     </div>
 
-    <div>
+    <div v-reveal class="max-w-[960px] mx-auto">
       <h2 class="font-hanken text-xl md:text-2xl font-bold text-primary tracking-[0.12em] uppercase mb-6">
         個人簡介
       </h2>
 
-      <div class="flex items-center my-8 px-4">
+      <div class="flex items-center my-8 px-0">
         <div class="flex-1 h-[1.5px] bg-neutral"></div>
       </div>
 

@@ -14,7 +14,7 @@ const project = computed(() => projects.find(p => p.id === route.params.id))
   <div class="min-h-screen bg-bg">
     <NavBar />
 
-    <main class="max-w-295 mx-auto px-10 pt-16 pb-24">
+    <main class="max-w-295 mx-auto px-5 md:px-10 pt-16 pb-24">
 
       <!-- ── 返回按鈕 ──────────────────────────────── -->
       <button
@@ -39,12 +39,12 @@ const project = computed(() => projects.find(p => p.id === route.params.id))
       <template v-else>
 
         <!-- ── 專案標題 ──────────────────────────────── -->
-        <h1 class="font-hanken font-bold text-[44px] text-primary leading-tight mb-7">
+        <h1 class="font-hanken font-bold text-3xl md:text-[44px] text-primary leading-tight mb-7">
           {{ project.title }}
         </h1>
 
         <!-- ── 大圖區（有圖顯示圖片，否則棋盤格佔位）──── -->
-        <div class="w-full h-95 rounded-md overflow-hidden">
+        <div v-reveal class="w-full h-56 sm:h-72 md:h-95 rounded-md overflow-hidden">
           <img
             v-if="project.image"
             :src="project.image"
@@ -87,8 +87,8 @@ const project = computed(() => projects.find(p => p.id === route.params.id))
           </svg>
         </div>
 
-        <!-- ── 描述 + 連結卡片（兩欄）──────────────────── -->
-        <div class="grid gap-12 mt-12" style="grid-template-columns: 1fr 360px; align-items: start;">
+        <!-- ── 描述 + 連結卡片（手機單欄、桌機兩欄）──── -->
+        <div v-reveal class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-8 lg:gap-12 mt-8 md:mt-12 items-start">
 
           <!-- 左：詳細描述 -->
           <p class="font-manrope font-light text-base leading-loose
