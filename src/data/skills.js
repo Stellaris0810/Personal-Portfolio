@@ -17,4 +17,24 @@ export const skills = [
               </svg>`,
     level: 4,
   },
+  { name: 'GitHub',       iconClass: 'devicon-github-original',    level: 4 },
+  { name: 'Node.js',      iconClass: 'devicon-nodejs-plain',       level: 3 },
+  { name: 'Photoshop',    iconClass: 'devicon-photoshop-plain',    level: 4 },
+  { name: 'Illustrator',  iconClass: 'devicon-illustrator-plain',  level: 3 },
+  { name: 'Figma',        iconClass: 'devicon-figma-plain',        level: 4 },
+  {
+    name: 'ComfyUI',
+    iconClass: null,
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="6" cy="6" r="2.5"/>
+                <circle cx="18" cy="6" r="2.5"/>
+                <circle cx="12" cy="18" r="2.5"/>
+                <path d="M8.5 6h7"/>
+                <path d="M7.1 8.1 10.9 15.8"/>
+                <path d="M16.9 8.1 13.1 15.8"/>
+              </svg>`,
+    level: 3,
+  },
 ]
