@@ -1,10 +1,11 @@
+// category：技能頁分組顯示（核心前端 / 開發工具 / 設計工具）
 export const skills = [
-  { name: 'HTML5',        iconClass: 'devicon-html5-plain',        level: 5 },
-  { name: 'CSS',          iconClass: 'devicon-css3-plain',         level: 4 },
-  { name: 'JavaScript',   iconClass: 'devicon-javascript-plain',   level: 4 },
-  { name: 'Vue.js',       iconClass: 'devicon-vuejs-plain',        level: 4 },
-  { name: 'Git',          iconClass: 'devicon-git-plain',          level: 3 },
-  { name: 'Tailwind CSS', iconClass: 'devicon-tailwindcss-plain',  level: 4 },
+  { name: 'HTML5',        iconClass: 'devicon-html5-plain',        level: 5, category: '核心前端' },
+  { name: 'CSS',          iconClass: 'devicon-css3-plain',         level: 4, category: '核心前端' },
+  { name: 'JavaScript',   iconClass: 'devicon-javascript-plain',   level: 4, category: '核心前端' },
+  { name: 'Vue.js',       iconClass: 'devicon-vuejs-plain',        level: 4, category: '核心前端' },
+  { name: 'Git',          iconClass: 'devicon-git-plain',          level: 3, category: '開發工具' },
+  { name: 'Tailwind CSS', iconClass: 'devicon-tailwindcss-plain',  level: 4, category: '核心前端' },
   {
     name: 'RWD',
     iconClass: null,
@@ -16,12 +17,13 @@ export const skills = [
                 <path d="M7 19v2"/><path d="M5 21h4"/>
               </svg>`,
     level: 4,
+    category: '核心前端',
   },
-  { name: 'GitHub',       iconClass: 'devicon-github-original',    level: 4 },
-  { name: 'Node.js',      iconClass: 'devicon-nodejs-plain',       level: 3 },
-  { name: 'Photoshop',    iconClass: 'devicon-photoshop-plain',    level: 4 },
-  { name: 'Illustrator',  iconClass: 'devicon-illustrator-plain',  level: 3 },
-  { name: 'Figma',        iconClass: 'devicon-figma-plain',        level: 4 },
+  { name: 'GitHub',       iconClass: 'devicon-github-original',    level: 4, category: '開發工具' },
+  { name: 'Node.js',      iconClass: 'devicon-nodejs-plain',       level: 3, category: '開發工具' },
+  { name: 'Photoshop',    iconClass: 'devicon-photoshop-plain',    level: 4, category: '設計工具' },
+  { name: 'Illustrator',  iconClass: 'devicon-illustrator-plain',  level: 3, category: '設計工具' },
+  { name: 'Figma',        iconClass: 'devicon-figma-plain',        level: 4, category: '設計工具' },
   {
     name: 'ComfyUI',
     iconClass: null,
@@ -36,5 +38,6 @@ export const skills = [
                 <path d="M16.9 8.1 13.1 15.8"/>
               </svg>`,
     level: 3,
+    category: '設計工具',
   },
 ]
