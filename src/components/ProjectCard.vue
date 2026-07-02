@@ -1,4 +1,7 @@
 <script setup>
+import TagBadge from '@/components/TagBadge.vue'
+import BaseButton from '@/components/BaseButton.vue'
+
 const props = defineProps({
   project:    Object,
   isFavorite: Boolean,
@@ -20,6 +23,8 @@ const emit = defineEmits(['view-detail', 'toggle-favorite'])
         v-if="project.image"
         :src="project.image"
         :alt="project.title"
+        loading="lazy"
+        decoding="async"
         class="absolute inset-0 w-full h-full object-cover"
       />
       <svg v-else xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 24 24"
@@ -32,12 +37,13 @@ const emit = defineEmits(['view-detail', 'toggle-favorite'])
 
       <!-- 收藏按鈕 -->
       <button
-        class="absolute top-3.5 right-3.5 w-[38px] h-[38px] rounded-full bg-white
+        class="absolute top-3.5 right-3.5 w-9.5 h-9.5 rounded-full bg-white
                flex items-center justify-center transition-all duration-200
                shadow-[0_1px_2px_rgba(44,44,44,0.06)] cursor-pointer"
         :class="isFavorite ? 'text-[#c0392b]' : 'text-primary'"
         @click="emit('toggle-favorite', project.id)"
-        aria-label="收藏"
+        :aria-label="isFavorite ? '取消收藏' : '收藏'"
+        :aria-pressed="isFavorite"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
           :fill="isFavorite ? 'currentColor' : 'none'"
@@ -55,12 +61,7 @@ const emit = defineEmits(['view-detail', 'toggle-favorite'])
 
       <!-- 技術標籤 -->
       <div class="flex gap-2 flex-wrap">
-        <span
-          v-for="tag in project.tags"
-          :key="tag"
-          class="inline-block px-[13px] py-1 rounded-full bg-secondary
-                 text-primary text-[13px] font-semibold font-manrope"
-        >{{ tag }}</span>
+        <TagBadge v-for="tag in project.tags" :key="tag" :label="tag" />
       </div>
 
       <!-- 標題 -->
@@ -74,15 +75,11 @@ const emit = defineEmits(['view-detail', 'toggle-favorite'])
       </p>
 
       <!-- 查看作品按鈕 — 不可使用 RouterLink，改用 emit -->
-      <button
-        class="view-btn w-full border border-primary bg-primary text-white
-               font-manrope font-semibold text-[13px] tracking-[0.06em]
-               py-[11px] rounded-xs cursor-pointer mt-1.5
-               transition-all duration-300"
+      <BaseButton
+        size="sm"
+        class="w-full mt-1.5"
         @click="emit('view-detail', project.id)"
-      >
-        查看作品
-      </button>
+      >查看作品</BaseButton>
 
     </div>
   </div>
@@ -105,11 +102,5 @@ const emit = defineEmits(['view-detail', 'toggle-favorite'])
 .proj-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 20px rgba(93, 64, 55, 0.08);
-}
-
-/* 按鈕 Hover 反色 */
-.view-btn:hover {
-  background: transparent;
-  color: #5D4037;
 }
 </style>

@@ -1,5 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
+import SectionHeading from '@/components/SectionHeading.vue'
+import BaseButton from '@/components/BaseButton.vue'
 
 defineProps({
   name: String,
@@ -19,7 +21,7 @@ const router = useRouter()
       <div v-reveal class="flex flex-col items-center md:items-end text-center md:text-left justify-center w-full order-2 md:order-1">
         <div>
           <span class="text-xs md:text-sm tracking-[0.4em] uppercase text-primary opacity-70 font-semibold font-manrope mb-4 md:mb-6 block">
-          {{ welcomeText }}
+          // {{ welcomeText }}
         </span>
 
         <h1 class="font-hanken font-bold text-neutral leading-[1.2] tracking-wide mb-6 md:mb-8 text-4xl sm:text-5xl lg:text-6xl">
@@ -33,35 +35,27 @@ const router = useRouter()
           </p>
         </div>
 
-        <button @click="router.push('/skills')" 
-        class="w-full sm:w-auto min-w-[180px] h-12 flex items-center justify-center gap-4 px-8 bg-primary text-white text-xs font-semibold font-manrope tracking-[0.2em] uppercase rounded-xs cursor-pointer border border-primary hover:bg-transparent hover:text-primary shadow-sm transition-all duration-300 transform active:scale-[0.98]">
-          了解更多
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 arrow-icon">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </button>
+        <BaseButton
+          arrow
+          class="w-full sm:w-auto min-w-45"
+          @click="router.push('/skills')"
+        >了解更多</BaseButton>
         </div>
-        
+
       </div>
 
       <div v-reveal="120" class="flex justify-center md:justify-start w-full order-1 md:order-2">
         <div class="w-full max-w-[380px] lg:max-w-[440px] overflow-hidden rounded-xs bg-white p-3 border border-nav-border/40 shadow-md aspect-[3/4] select-none">
-          <img :src="image" :alt="name" 
+          <img :src="image" :alt="name" fetchpriority="high"
           class="w-full h-full object-cover object-top filter saturate-[0.96] contrast-[1.01]" />
         </div>
       </div>
     </div>
 
     <div v-reveal class="max-w-[960px] mx-auto">
-      <h2 class="font-hanken text-xl md:text-2xl font-bold text-primary tracking-[0.12em] uppercase mb-6">
-        個人簡介
-      </h2>
+      <SectionHeading overline="Profile" title="個人簡介" />
 
-      <div class="flex items-center my-8 px-0">
-        <div class="flex-1 h-[1.5px] bg-neutral"></div>
-      </div>
-
-      <div class="pt-4">
+      <div class="pt-4 mt-8">
         <p class="font-manrope font-light text-[15px] md:text-[16px] leading-[2] text-neutral opacity-80 tracking-wider text-start mx-auto max-w-[960px]">
           {{ intro }}
         </p>
@@ -70,10 +64,3 @@ const router = useRouter()
 
   </div>
 </template>
-
-<style scoped>
-/* 讓按鈕的箭頭在 Hover 時產生位移效果 */
-button:hover .arrow-icon {
-  transform: translateX(6px);
-}
-</style>
