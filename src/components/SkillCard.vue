@@ -1,10 +1,14 @@
 <script setup>
-defineProps({
-  name:      String,
-  level:     Number,
-  iconClass: String,
-  iconSvg:   String,
+const props = defineProps({
+  name:    String,
+  level:   Number,  // 支援半顆星，如 4.5
+  iconSrc: String,  // public/icons/ 下的圖檔路徑
 })
+
+// 第 i 顆星的填色比例：4.5 → 前 4 顆 100%、第 5 顆 50%
+function starFill(i) {
+  return `${Math.min(Math.max((props.level - i + 1) * 100, 0), 100)}%`
+}
 </script>
 
 <template>
@@ -12,22 +16,22 @@ defineProps({
               flex flex-col items-center gap-4 pt-8.5 pb-5.5
               transition-all duration-300 cursor-default">
 
-    <!-- Devicon 圖示 -->
-    <i v-if="iconClass" :class="[iconClass, 'text-[56px] text-neutral block']"></i>
-    <!-- 自訂 SVG 圖示（無 Devicon 的技能，如 RWD） -->
-    <span v-else-if="iconSvg" class="text-neutral" v-html="iconSvg"></span>
+    <!-- 技能圖示 -->
+    <img :src="iconSrc" :alt="name" loading="lazy"
+         class="w-14 h-14 object-contain block" />
 
     <!-- 技能名稱 -->
     <span class="font-manrope text-lg font-medium text-neutral">{{ name }}</span>
 
-    <!-- 熟練度星星 -->
-    <div class="flex" style="letter-spacing: 4px;">
-      <span
-        v-for="i in 5"
-        :key="i"
-        class="text-sm"
-        :class="i <= level ? 'text-primary' : 'text-[#C0A79D]'"
-      >★</span>
+    <!-- 熟練度星星：灰星為底，棕星依比例裁切覆蓋（支援半顆星） -->
+    <div class="flex gap-1" :aria-label="`熟練度 ${level} / 5`">
+      <span v-for="i in 5" :key="i" class="relative text-sm text-[#C0A79D]">
+        ★
+        <span
+          class="absolute inset-y-0 left-0 overflow-hidden text-primary"
+          :style="{ width: starFill(i) }"
+        >★</span>
+      </span>
     </div>
 
   </div>

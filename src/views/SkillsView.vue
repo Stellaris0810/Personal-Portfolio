@@ -49,8 +49,7 @@ const overlines = {
           v-reveal="(i % 4) * 80"
           :name="skill.name"
           :level="skill.level"
-          :iconClass="skill.iconClass"
-          :iconSvg="skill.iconSvg"
+          :iconSrc="skill.iconSrc"
         />
       </div>
     </section>
