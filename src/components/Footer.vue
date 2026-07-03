@@ -23,7 +23,7 @@ const year = new Date().getFullYear()
 
       <!-- 聯絡資訊 -->
       <div v-reveal="100" class="flex flex-col items-center md:items-end gap-3.5">
-        <span class="font-manrope text-xs tracking-[0.2em] uppercase text-primary/70 font-semibold">
+        <span class="font-manrope text-lg tracking-[0.2em] uppercase text-primary/70 font-semibold">
           聯絡我
         </span>
 
