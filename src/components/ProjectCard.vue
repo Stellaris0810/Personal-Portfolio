@@ -11,7 +11,8 @@ const emit = defineEmits(['view-detail', 'toggle-favorite'])
 </script>
 
 <template>
-  <div class="proj-card flex flex-col bg-white border border-[rgba(179,169,165,0.4)]
+  <!-- h-full：撐滿格線/輪播格子的高度，讓同列卡片等高 -->
+  <div class="proj-card h-full flex flex-col bg-white border border-[rgba(179,169,165,0.4)]
               rounded-[10px] overflow-hidden transition-all duration-300
               shadow-[0_1px_2px_rgba(44,44,44,0.06)]">
 
@@ -69,8 +70,8 @@ const emit = defineEmits(['view-detail', 'toggle-favorite'])
         {{ project.title }}
       </h3>
 
-      <!-- 摘要 -->
-      <p class="text-sm text-neutral/60 leading-[1.7] flex-1 font-manrope">
+      <!-- 摘要：固定 3 行高度——過長截斷（詳細頁有完整內容）、過短留白，卡片高度才會一致 -->
+      <p class="text-sm text-neutral/60 leading-[1.7] flex-1 font-manrope line-clamp-3 min-h-18">
         {{ project.summary }}
       </p>
 
