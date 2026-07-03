@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- 品牌 icon：木棕底 + 義大利體襯線 S（呼應 Stellaris's Web wordmark） -->
+  <rect width="64" height="64" rx="8" fill="#5D4037"/>
+  <text x="31" y="47" text-anchor="middle"
+        font-family="'Playfair Display', Georgia, 'Times New Roman', serif"
+        font-style="italic" font-weight="600" font-size="44"
+        fill="#FCF9F8">S</text>
+</svg>
