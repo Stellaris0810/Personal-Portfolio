@@ -61,7 +61,7 @@ export const projects = [
     tags: ['HTML', 'Vue.js', 'Tailwind'],
     featured: true,
     summary: '基於 Vue 3 重構文化部藝文活動平台,整合活動、場館、藝人多型別資料的響應式前端專案。',
-    desc: 'iCulture 為文化部藝文活動平台改版,我擔任資深前端角色,主導從競品分析、資訊架構重構(16 分類精簡為 8 大主題)到前端落地的完整流程。專案以 Vue 3 + Vite + Tailwind CSS v4 + Pinia 建構,完成全站聚合搜尋、三態個人化推薦、會員收藏模擬與全頁面 RWD,並導入 fluid typography 與 Leaflet 互動地圖,展現資料驅動的文化體驗設計思維。',
+    desc: 'iCulture 為文化部藝文活動平台改版,我擔任前端角色,主導從競品分析、資訊架構重構(16 分類精簡為 8 大主題)到前端落地的完整流程。專案以 Vue 3 + Vite + Tailwind CSS v4 + Pinia 建構,完成全站聚合搜尋、三態個人化推薦、會員收藏模擬與全頁面 RWD,並導入 fluid typography 與 Leaflet 互動地圖,展現資料驅動的文化體驗設計思維。',
     highlights: [
       '資訊架構重構：16 分類精簡為 8 大主題，主導競品分析到前端落地',
       '全站聚合搜尋與三態個人化推薦，整合活動、場館、藝人多型別資料',
