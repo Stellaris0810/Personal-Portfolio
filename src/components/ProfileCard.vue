@@ -45,18 +45,18 @@ const router = useRouter()
       </div>
 
       <div v-reveal="120" class="flex justify-center md:justify-start w-full order-1 md:order-2">
-        <div class="w-full max-w-[380px] lg:max-w-[440px] overflow-hidden rounded-xs bg-white p-3 border border-nav-border/40 shadow-md aspect-[3/4] select-none">
+        <div class="w-full max-w-95 lg:max-w-110 overflow-hidden rounded-xs bg-white p-3 border border-nav-border/40 shadow-md aspect-3/4 select-none">
           <img :src="image" :alt="name" fetchpriority="high"
           class="w-full h-full object-cover object-top filter saturate-[0.96] contrast-[1.01]" />
         </div>
       </div>
     </div>
 
-    <div v-reveal class="max-w-[960px] mx-auto">
+    <div v-reveal class="max-w-240 mx-auto">
       <SectionHeading overline="Profile" title="個人簡介" />
 
       <div class="pt-4 mt-8">
-        <p class="font-manrope font-light text-[15px] md:text-[16px] leading-[2] text-neutral opacity-80 tracking-wider text-start mx-auto max-w-[960px]">
+        <p class="font-manrope font-light text-[15px] md:text-base leading-loose text-neutral opacity-80 tracking-wider text-start mx-auto max-w-240">
           {{ intro }}
         </p>
       </div>
